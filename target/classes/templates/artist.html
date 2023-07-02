@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/base.css">
+    <link rel="stylesheet" href="/css/navbar.css">
+    <link rel="stylesheet" href="/css/artist.css">
+    <title>SiwMovie - Artist Page</title>
+</head>
+<body>
+    <nav>
+        <h1><a href="/" id="siw-nav-title">SIWMOVIE</a></h1>
+        <h2>Artist</h2>
+        <a th:if="${userDetails}" href="/logout" class="log">LOG OUT</a>
+        <a th:unless="${userDetails}" href="/login" class="log">SIGN IN</a>
+    </nav>
+
+    <!-- todo frontend-->
+    <div class="container">
+        <div>
+            <h1 th:text="${ artist.name + ' ' + artist.surname }" >..</h1>
+            <div th:text="${'Date of birth: '+#temporals.format(artist.birthDate, 'dd-MM-yyyy')}"></div>
+            <div th:if="${artist.deathDate != null}" th:text="${'Date of death: '+  #temporals.format(artist.deathDate, 'dd-MM-yyyy')}"></div>
+        </div>
+        <img th:src="@{'data:image/*;base64,'+${profilePic.base64Image}}" alt="Artist image">
+
+    </div>
+
+    
+</body>
+</html>

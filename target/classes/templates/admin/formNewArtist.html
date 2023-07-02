@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Siw Movie - New Artist</title>
+    <link rel="stylesheet" href="/css/base.css">
+    <link rel="stylesheet" href="/css/navbar.css">
+    <link rel="stylesheet" href="/css/formNewArtist.css">
+</head>
+<body>
+    <nav>
+        <h1><a href="/" id="siw-nav-title">SIWMOVIE</a></h1>
+        <h2>Admin - Nuovo Artista</h2>
+        <a href="/logout" class="log">LOG OUT</a>
+    </nav>
+    <form th:action="@{/admin/artist}" method="post" enctype="multipart/form-data" th:object="${artist}">
+        <div th:if="${#fields.hasGlobalErrors()}">
+            <p th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p>
+        </div>
+        <div>
+            <label>Nome: </label>
+            <span><input type="text" th:field="${artist.name}" placeholder="Name"></span>
+            <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}" >...</span>
+        </div>
+        <div>
+            <label>Cognome: </label>
+            <span><input required type="text" th:field="${artist.surname}" placeholder="Surname"></span>
+            <span th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}" >...</span>
+        </div>
+        <div>
+            <label>Date di Nascita: </label>
+            <span><input required type="date" th:field="${artist.birthDate}"></span>
+            <span th:if="${#fields.hasErrors('birthDate')}" th:errors="*{birthDate}" >...</span>
+        </div>
+        <div>
+            <label>Date di Morte <span>(Optional)</span>: </label>
+            <span><input type="date" th:field="${artist.deathDate}"></span>
+            <span th:if="${#fields.hasErrors('deathDate')}" th:errors="*{deathDate}" >...</span>
+        </div>
+        <div>
+            <label>Immagine Artista:</label>
+            <span><input required type="file" name="file"></span>
+        </div>
+        <div>
+            <span><button type="submit">Confirm</button></span>
+        </div>
+    </form>
+</body>
+</html>

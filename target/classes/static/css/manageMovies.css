@@ -1,0 +1,22 @@
+body{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.movies{
+    margin: 2rem;
+}
+
+.movie-list{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.movie{
+    font-size: 18px;
+    margin: 0.8rem;
+}

@@ -1,0 +1,42 @@
+.main-container{
+    margin: 150px 4rem;
+    padding: 2rem;
+    text-align: center;
+    border: 1px solid white;
+    border-radius: 25px;
+
+}
+
+.main-container h1{
+    margin-bottom: 5rem;
+}
+
+.operations{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+
+.operations a{
+    color: darkred;
+    text-decoration: none;
+    border: 1px solid var(--jet-black);
+    border-radius: 20px;
+    padding: 13px 7px;
+    margin: 5px 5px;
+    width: 30%;
+    background-color: lightgrey;
+    font-weight: 700;
+}
+
+.operations a:visited{
+    color: darkred;
+}
+
+.operations a:hover{
+    box-shadow: 3px 3px 3px red;
+}

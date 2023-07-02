@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SIW Movie - Movie Page</title>
+    <link rel="stylesheet" href="/css/base.css">
+    <link rel="stylesheet" href="/css/navbar.css">
+    <link rel="stylesheet" href="/css/movie.css">
+</head>
+<body>
+    <!-- NAVBAR -->
+    <nav>
+        <h1><a href="/" id="siw-nav-title">SIWMOVIE</a></h1>
+        <h2>Film</h2>
+        <a th:if="${userDetails}" href="/logout" class="log">LOG OUT</a>
+        <a th:unless="${userDetails}" href="/login" class="log">ACCEDI</a>
+    </nav>
+
+    <!-- FILM PAGE -->
+
+    <div th:if="${movie}" class="full-container">
+        <div id="movie-info">
+            <img th:if="${image}" th:src="@{'data:image/*;base64,'+${image.base64Image}}" id="movie-pic">
+            
+            <div>
+                <h1 id="movie-title" th:text="${movie.title} + ' (' + ${movie.year} + ')' "></h1>
+                <div class="movie-cast">
+
+                    <div th:if="${movie.director}" id="director">
+                        <h4>Direttore:</h4>
+                        <a th:href="@{'/artist/' +${movie.director.id}}">
+                            <!-- <div class="img-inner"><img th:if="${movie.director.profilePicture}" th:src="@{'data:image/*;base64,'+${movie.director.profilePicture.base64Image}}" alt="Actor image"></div> -->
+                            <span th:text="${movie.director.name} + ' ' + ${movie.director.surname}"></span>
+                        </a>
+                    </div>
+
+                    <div th:if="${not #lists.isEmpty(movie.actors)}" id="actors">
+                        <h4>Attori:</h4>
+                        <a th:each="actor : ${movie.actors}" th:href="@{'/artist/' +${actor.id}}">
+                            <!-- <div class="img-inner"><img th:if="${actor.profilePicture}" th:src="@{'data:image/*;base64,'+${actor.profilePicture.base64Image}}" alt="Actor image"></div>-->
+                            <span th:text="${actor.name} + ' ' + ${actor.surname}"></span>
+                        </a>
+                    </div>
+                </div>  
+            </div>
+        </div>
+        <br>
+        <br>
+        
+        <!-- REVIEW FORM (IF REVIEW AVAILABLE <=> IF USER LOGGED) -->
+        <div th:if="${review != null}">
+            <h2>RECENSIONI</h2>
+            <form th:action="@{'/user/review/' + ${movie.id}}" th:object="${review}" method="post" id="review">
+                <h3>Pubblica una recensione!</h3>
+                <span><input type="text" th:field="${review.title}" placeholder="Titolo"></span>
+                <span><input id="form-rev-text" type="text" th:field="${review.text}" placeholder="Scrivi Recensione"></span>
+                <span id="rating">Voto: 
+                    <select form="review" th:field="${review.rating}">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
+                </span>
+                
+                <span><button type="submit">Conferma</button></span>
+                
+            </form>
+        </div>
+        <!-- REVIEW LIST -->
+        <div th:if="${not #lists.isEmpty(movie.reviews)}">
+            <!-- SINGLE REVIEW-->
+            <div th:each = "review : ${movie.reviews}" class="review">
+                <div class="review-title-line"><h2 th:text="${review.title}">Title </h2><span th:if="${admin}"><a th:href="@{'/admin/deleteReview/' + ${movie.id} + '/' + ${review.id}}"><button>ELIMINA</button></a></span></div>
+                <div class="review-text" th:text="${review.text}">Review Text</div>
+                <div class="review-author-rating"><div th:text="'-' + ${review.author}">Author username</div><span class="review-rating" th:text="${'Valutazione: ' + review.rating}">Valutazione: 5</span></div>
+            </div>
+            <span th:if="${reviewError}" th:text="${reviewError}"></span>
+            
+        </div>
+
+    </div>
+    
+    <div th:unless="${movie}">
+        Questo Film non esiste
+    </div>
+</body>
+</html>

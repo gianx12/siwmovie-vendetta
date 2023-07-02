@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Siw Movie - Set Movie Director</title>
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/navbar.css">
+  <link rel="stylesheet" href="/css/addDirector.css">
+</head>
+<body>
+  <nav>
+    <h1><a href="/" id="siw-nav-title">SIWMOVIE</a></h1>
+    <h2>Admin - Aggiungi Direttore</h2>
+    <a href="/logout" class="log">LOG OUT</a>
+  </nav>
+
+  
+  <div class="container">
+    <h1 th:text="${'Movie: ' + movie.title + ' (' +movie.year + ')'}"></h1>
+    <h2>Scegli il Direttore del Film</h2>
+  <ul>
+    <li th:each="artist : ${artists}">
+      <a th:text="${artist.name} + ' ' +  ${artist.surname}" th:href="@{'/admin/setDirectorToMovie' + '/' + ${artist.id} + '/' + ${movie.id}}">Mario Rossi</a>
+    </li>
+  </ul>
+  </div>
+  
+</body>
+</html>

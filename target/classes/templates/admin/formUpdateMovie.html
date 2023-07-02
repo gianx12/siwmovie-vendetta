@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Siw Movie - Update Movie</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/base.css">
+    <link rel="stylesheet" href="/css/navbar.css">
+    <link rel="stylesheet" href="/css/updateMovie.css">
+</head>
+<body>
+  <nav>
+    <h1><a href="/" id="siw-nav-title">SIWMOVIE</a></h1>
+    <h2>Admin - Aggiona Film</h2>
+    <a href="/logout" class="log">LOG OUT</a>
+  </nav>
+  <div class="container">
+    <h2 th:text="${'Film: ' + movie.title + ' (' +movie.year + ')'}"></h2>
+    <div th:if="${movie.director == NULL}">
+       Nessun Direttore impostato
+      <a th:href="@{'/admin/addDirector/' + ${movie.id}}"><button>IMPOSTA DIRETTORE</button></a>
+    </div>
+    <div th:unless="${movie.director == NULL}">
+      <h4>Direttore:</h4>
+      <span th:text="${movie.director.name} + ' ' + ${movie.director.surname}"> ...</span>
+      <a th:href="@{'/admin/removeDirectorToMovie/' + ${movie.id}}"><button>RIMUOVI</button></a>
+    </div>
+
+    <div th:if="${movie.actors == NULL or movie.actors.isEmpty()}">
+      Nessun Attore impostato
+      <span><a th:href="@{'/admin/updateActorsOnMovie/' + ${movie.id}}"><button>IMPOSTA ATTORI</button></a></span>
+    </div>
+    <div th:unless="${movie.actors == NULL or movie.actors.isEmpty()}">
+      <h4>Attori: <a th:href="@{'/admin/updateActorsOnMovie/' + ${movie.id}}"><button>MODIFICA ATTORI</button></a></h4>
+      <ul>
+        <li th:each="actor : ${movie.actors}" th:text="${actor.name} + ' ' + ${actor.surname} + ' (' + ${#temporals.format(actor.birthDate, 'dd-MM-yyyy')} +')'">
+          Franco Califano (20-11-3453)
+        </li>
+      </ul>
+    </div>
+  </div>
+</body>
+</html>
