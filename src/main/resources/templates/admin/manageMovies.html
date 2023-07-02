@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Siw Movie - Manage Movies</title>
+    <link rel="stylesheet" href="/css/base.css">
+    <link rel="stylesheet" href="/css/navbar.css">
+    <link rel="stylesheet" href="/css/manageMovies.css">
+</head>
+<body>
+  <nav>
+    <h1><a href="/" id="siw-nav-title">SIWMOVIE</a></h1>
+    <h2>Admin - Gestisci Film</h2>
+    <a href="/logout" class="log">LOG OUT</a>
+  </nav>
+
+  <div th:if="${movies.isEmpty()}">
+    No movies currently in the database
+  </div>
+  <div th:unless="${movies.isEmpty()}" class="movies">
+    <h1>   Film:</h1>
+    <div class="movie-list">
+      <div class="movie" th:each="movie : ${movies}">
+        <a th:href="@{'/admin/formUpdateMovie/' + ${movie.id}}" th:text="${movie.title} + ' (' + ${movie.year} + ')'">Avatar (2020)</a>
+      </li>
+    </div>
+  </div>
+</body>
+</html>

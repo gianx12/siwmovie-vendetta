@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Siw Movie - New Movie</title>
+    <link rel="stylesheet" href="/css/base.css">
+    <link rel="stylesheet" href="/css/navbar.css">
+    <link rel="stylesheet" href="/css/formNewMovie.css">
+</head>
+<body>
+    <nav>
+        <h1><a href="/" id="siw-nav-title">SIWMOVIE</a></h1>
+        <h2>Admin - Nuovo Film</h2>
+        <a href="/logout" class="log">LOG OUT</a>
+    </nav>
+
+
+    <form th:action="@{/admin/uploadMovie}" method="post" enctype="multipart/form-data" th:object="${movie}">
+        <div th:if="${#fields.hasGlobalErrors()}">
+            <p th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p>
+        </div>
+        <div>
+            <label> Titolo Film </label>
+            <span><input type="text" placeholder="Movie title" th:field="${movie.title}"></span>
+        </div>
+        <div>
+            <label> Anno Film </label>
+            <span><input required type="text" placeholder="Movie year" th:field="${movie.year}"></span>
+        </div>
+
+        
+        <div class="image">
+            <label> Immagine Film</label>
+            <input required type="file" name="file">
+        </div>
+
+        <div>
+            <span><button type="submit">Conferma</button></span>
+        </div>
+    </form>
+</body>
+</html>

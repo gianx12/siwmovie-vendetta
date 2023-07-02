@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Siw Movie - Set Actors</title>
+    <link rel="stylesheet" href="/css/base.css">
+    <link rel="stylesheet" href="/css/navbar.css">
+	<link rel="stylesheet" href="/css/actorsToAdd.css">
+</head>
+<body>
+	<nav>
+        <h1><a href="/" id="siw-nav-title">SIWMOVIE</a></h1>
+        <h2>Admin - Aggiungi Attori</h2>
+        <a href="/logout" class="log">LOG OUT</a>
+    </nav>
+
+
+	<div class="container">
+		<h1 th:text="'Attori per : ' + ${movie.title} + ' (' + ${movie.year} + ')'"></h1>
+		<div>
+
+			
+			<div th:if="${movie.actors.isEmpty()}">Nessun Attore</div>
+			<ul th:unless="${movie.actors.isEmpty()}">
+				<li th:each="actor : ${movie.actors}">
+					<span th:text="${actor.name}+' '+${actor.surname}"></span>
+					<a th:href="@{'/admin/removeActorFromMovie/'+ ${actor.id}+'/'+${movie.id}}">Rimuovi</a>
+				</li>
+			</ul>
+			<div>
+				Attori non presenti nel Film:
+				<ul>
+					<li th:each="actor : ${actorsToAdd}">
+						<span th:text="${actor.name}+' '+${actor.surname}"></span>
+						<a th:href="@{'/admin/addActorToMovie/'+ ${actor.id}+'/'+${movie.id}}">Aggiungi</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+		<a th:href="@{'/admin/formUpdateMovie/'+ ${movie.id}}"><button type="button">FINITO</button></a>
+</body>
+</html>

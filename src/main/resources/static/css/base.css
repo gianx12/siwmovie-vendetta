@@ -1,0 +1,26 @@
+body {
+	background-image: url("/images/siw_sala.jpeg");
+  background-position: center;
+  background-size: cover;
+  	backdrop-filter: blur(5px);
+ height: 100vh;
+}
+
+:root{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    --jet-black: white;
+    --cream: #efe9e7;
+    --purple: #52154e;
+    --bluenavy: #111344;
+}
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+    color: var(--jet-black);
+}
+
+body{
+    background-color: var(--lavander);
+}
+

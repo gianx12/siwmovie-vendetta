@@ -1,0 +1,37 @@
+body{
+    padding: 5rem 3rem;
+}
+
+img{
+    max-width: 40%;
+    border: none;
+    border-radius: 16px;
+    box-shadow: 3px 2px 4px var(--jet-black);
+}
+
+.container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.container > div{
+    margin: 0 25px;
+}
+
+.container > div > div{
+    margin-top: 10px;
+    font-size: larger;
+}
+
+@media screen and (max-width: 900px) {
+    body{
+        padding: 4rem 1.5rem;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    body{
+        padding: 3.7rem 0.6rem;
+    }
+}

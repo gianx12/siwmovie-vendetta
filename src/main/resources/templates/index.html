@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/base.css">
+    <link rel="stylesheet" href="/css/navbar.css">
+    <link rel="stylesheet" href="/css/index.css">
+    <title>SiwMovie - Home Page</title>
+</head>
+<body>
+    <nav>
+        <h2>Home page</h2>
+         <h1><a href="/" id="siw-nav-title">SIWMOVIE</a></h1>
+        <a th:if="${userDetails}" href="/logout" class="log">LOG OUT</a>
+        <a th:unless="${userDetails}" href="/login" class="log">ACCEDI</a>
+    </nav>
+    <div id="artists"><a href="/artists">Vedi Artisti</a></div>
+    <div class="movies" >
+        <a class="card" th:each="movie : ${movies}" th:href="@{'/movie/' + ${movie.id}}" >
+            <div class="card_content">
+                <img th:src="@{'data:image/*;base64,' + ${movie.image.base64Image}}" alt="film picture">
+                <div class="card-text">
+                    <div class="card-p" th:text="${movie.title}">Avatar</div>
+                    <div class="card-p" th:text="${movie.year}">2012</div>
+                </div>
+            </div>
+        </a>
+    </div>
+</body>
+</html>
